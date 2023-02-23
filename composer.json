@@ -1,0 +1,13 @@
+{
+    "name": "cw/cw",
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src"
+        },
+        "files" : [
+            "src/Helpers/Helper.php"
+        ]
+    }
+
+
+}
