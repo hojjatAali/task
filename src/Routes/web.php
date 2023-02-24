@@ -12,6 +12,10 @@ Router::get('/', [HomeControler::class, 'index']);
 
 Router::post('/task',[TaskController::class,'store']);
 Router::get('/task',[TaskController::class,'create']);
+Router::get('/tasks',[TaskController::class,'index']);
+Router::get('/show',[TaskController::class,'show']);
+Router::get('/edit',[TaskController::class,'edit']);
+Router::post('/edit',[TaskController::class,'update']);
 
 Router::post('/login', [LoginControler::class, 'store']);
 Router::post('/logout', [LoginControler::class, 'destroy']);

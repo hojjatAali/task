@@ -28,7 +28,7 @@ class Repository
 
     }
 
-    public function read($table, $column = null)
+    public function read($table, $column =['*'])
     {
         return $this->queryBuilder::table($table)->select($column)->get();
 
@@ -39,6 +39,12 @@ class Repository
 
         return $this->queryBuilder::table($table)->select()->where('id', $index)->first();
 
+    }
+
+
+    public function update($table,$index,$value){
+
+        return $this->queryBuilder::table($table)->update($index,$value);
 
     }
 }

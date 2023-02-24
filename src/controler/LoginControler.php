@@ -39,7 +39,7 @@ class LoginControler
 
         login($user);
 
-        return view('home/home');
+        return view('home/index');
 
 
     }
@@ -47,7 +47,7 @@ class LoginControler
     public function destroy()
     {
         logout();
-        return view('home/home');
+        return view('home/index');
     }
 
 

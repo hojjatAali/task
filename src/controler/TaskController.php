@@ -27,41 +27,47 @@ class TaskController
     }
 
 
-    public function read()
+    public function index()
     {
 
         $tasks = $this->repository->read('task');
-        view('task/index');
+        view('task/index',compact('tasks'));
 
     }
 
-    public function show($index)
+    public function show($data)
     {
-
-        $task = $this->repository->find('task', $index);
-        view('task/show');
-
-
-    }
-
-    public function edit($id)
-    {
-        $editabletask=$this->repository->find('task',$id);
-
-
-
+        $task = $this->repository->find('task', $data['id']);
+        view('task/show',compact('task'));
 
 
     }
 
-    public function update()
+    public function edit($data)
     {
+        $task=$this->repository->find('task',$data['id']);
+        view('task/edit',compact('task'));
 
 
+    }
+
+    public function update($data)
+    {
+        $id= (int)$data['id'];
+
+        $task=[
+            'title'=>$_POST['title'],
+            'content'=> $_POST['content']
+        ];
+
+        $this->repository->update('task',$id,$task);
+
+        header('location:/tasks');
     }
 
     public function delete()
     {
+
 
 
     }
@@ -77,6 +83,8 @@ class TaskController
 
 
     }
+
+
 
 
 }

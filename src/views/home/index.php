@@ -1,5 +1,5 @@
 <?php
-
+require_once __DIR__.'/../layout/header.php';
 ?>
 
 <!doctype html>
@@ -13,10 +13,7 @@
 </head>
 <body>
 
-<a href="/login"> login</a>
-<a href="/register"> register</a>
-<a href="/home"> home</a>
-<a href="/task"> create task</a>
+
 
 </body>
 </html>

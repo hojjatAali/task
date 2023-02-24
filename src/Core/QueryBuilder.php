@@ -6,9 +6,10 @@ use Exception;
 use PDO as PDOAlias;
 use Src\model\database\Connection;
 
-class QueryBuilder {
+class QueryBuilder
+{
 
-    private  $connection;
+    private $connection;
 
     private string $table;
 
@@ -26,7 +27,8 @@ class QueryBuilder {
 
     }
 
-    public static function table(string $table){
+    public static function table(string $table)
+    {
         self::$instance = new self();
 
         self::$instance->table = $table;
@@ -34,23 +36,25 @@ class QueryBuilder {
         return self::$instance;
     }
 
-    public function select(array $columns = ['*']){
+    public function select(array $columns = ['*'])
+    {
 
-        if(is_null($this->table)){
+        if (is_null($this->table)) {
             throw new Exception("table is not selected.");
         }
 
-        $this->columns =  $columns;
+        $this->columns = $columns;
 
 
-        $select = implode( ', ', $this->columns);
+        $select = implode(', ', $this->columns);
 
         $this->query = "SELECT $select FROM $this->table";
 
         return $this;
     }
 
-    public function get() {
+    public function get()
+    {
         $statement = $this->connection->prepare($this->query);
 
         $statement->execute($this->where);
@@ -58,7 +62,8 @@ class QueryBuilder {
         return $statement->fetchAll();
     }
 
-    public function create(array $values){
+    public function create(array $values)
+    {
         $value = implode(', ', $values);
         $key = implode(', ', array_keys($values));
         $placeHolders = implode(', :', array_keys($values));
@@ -70,11 +75,29 @@ class QueryBuilder {
         return $statement->execute($values);
     }
 
-    public function where(string $column, string $value){
+    public function update($id, array $values)
+    {
 
-        if(!is_null($this->where)) {
+        $data = [];
+        foreach ($values as $key => $value) {
+            $data[] = $key . "= :" . $key;
+        }
+        $result = implode(',', $data);
+
+        $query = "UPDATE $this->table SET  $result WHERE  id = $id";
+
+        $statement = $this->connection->prepare($query);
+//        var_dump($query);die();
+        return $statement->execute($values);
+
+    }
+
+    public function where(string $column, string $value)
+    {
+
+        if (!is_null($this->where)) {
             $this->query = $this->query . " WHERE ";
-        }else{
+        } else {
             $this->query = $this->query . " AND ";
         }
 
@@ -86,7 +109,8 @@ class QueryBuilder {
     }
 
 
-    public function first() {
+    public function first()
+    {
         $statement = $this->connection->prepare($this->query);
 
         $statement->execute($this->where);
@@ -94,7 +118,8 @@ class QueryBuilder {
         return $statement->fetch();
     }
 
-    public function orWhere(){
+    public function orWhere()
+    {
 
     }
 }
