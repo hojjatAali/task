@@ -10,16 +10,14 @@ class LoginControler
 
     private Repository $repository;
 
-
     public function __construct()
     {
         $this->repository = new Repository();
     }
 
-
     public function create()
     {
-        return view('Register/Create');
+        return view('Login/Create');
 
     }
 
@@ -31,11 +29,11 @@ class LoginControler
         $user = $this->repository->finedByEmail($email);
 
         if ($user == null) {
-            return view('Register/create');
+            return view('Login/create');
         }
         if ($password !== $user['password']) {
 
-            return view('Login/Create');
+            return view('Register/Create');
 
         }
 
