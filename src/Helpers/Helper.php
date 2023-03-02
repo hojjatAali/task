@@ -1,23 +1,29 @@
 <?php
 
 
-function view($name){
+function view($name, $data = null)
+{
 
-    require  './src/views/'. $name .'.php';
+    isset($data) ? extract($data) :null;
+    require './src/views/' . $name . '.php';
 
 }
 
-function login(array $user){
+function login(array $user)
+{
 
-    $_SESSION[$user['id']] = $user['id'];
-    setcookie('id', $user['id']);
+    $token = bin2hex(random_bytes(2));
+    $_SESSION[$token] = $user['id'];
+    setcookie('id', $token);
 }
 
-function logout(){
-    $_SESSION[$_COOKIE['id']] = null;
+function logout()
+{
+    unset($_SESSION[$_COOKIE['id']]);
     $_COOKIE['id'] = null;
 }
 
-function redirect($name){
+function redirect($name)
+{
     header("Location:{$name}");
 }
