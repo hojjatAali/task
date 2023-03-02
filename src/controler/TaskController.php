@@ -22,8 +22,6 @@ class TaskController
 
         view('task/create');
 
-
-
     }
 
 
@@ -49,7 +47,6 @@ class TaskController
         $task=$this->repository->find('task',$data['id']);
         view('task/edit',compact('task'));
 
-
     }
 
     public function update($data)
@@ -58,7 +55,8 @@ class TaskController
 
         $task=[
             'title'=>$_POST['title'],
-            'content'=> $_POST['content']
+            'content'=> $_POST['content'],
+            'group_id'=>$_POST['group_id']
         ];
 
         $this->repository->update('task',$id,$task);
@@ -78,15 +76,12 @@ class TaskController
     {
         $task=[
           'title'=>$_POST['title'],
-          'content'=> $_POST['content']
+          'content'=> $_POST['content'],
+          'group_id'=>$_POST['group_id']
         ];
         $this->repository->insert($task,'task');
         view('task/index');
 
-
     }
-
-
-
 
 }
