@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/../layout/header.php';
+require_once __DIR__ . '/../layout/header.php';
 
 ?>
 
@@ -18,10 +18,22 @@ require_once __DIR__.'/../layout/header.php';
         <label class="form-label" for="form2Example2">content</label>
     </div>
 
+    <div class="form-outline mb-4">
+        <label class="form-label" for="group_id">Group</label>
+        <select name="group_id">
+            <?php
+            foreach ($groups as $group) {
+            ?>
+                <option value="<?= $group['id'] ?>"><?= $group['name'] ?></option>
+            <?php } ?>
+        </select>
+    </div>
+
     <!-- Submit button -->
     <button type="submit" class="btn btn-primary btn-block mb-4">create task</button>
 
 </form>
 
 </body>
+
 </html>

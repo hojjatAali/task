@@ -24,7 +24,6 @@ class QueryBuilder
     public function __construct()
     {
         $this->connection = (new Connection())->getConnection();
-
     }
 
     public static function table(string $table)
@@ -38,13 +37,10 @@ class QueryBuilder
 
     public function select(array $columns = ['*'])
     {
-
         if (is_null($this->table)) {
             throw new Exception("table is not selected.");
         }
-
         $this->columns = $columns;
-
 
         $select = implode(', ', $this->columns);
 
@@ -64,20 +60,18 @@ class QueryBuilder
 
     public function create(array $values)
     {
-        $value = implode(', ', $values);
+        
         $key = implode(', ', array_keys($values));
         $placeHolders = implode(', :', array_keys($values));
 
-
         $query = "INSERT INTO $this->table ($key) VALUES (:$placeHolders)";
-
+        // var_dump($query); die();
         $statement = $this->connection->prepare($query);
         return $statement->execute($values);
     }
 
     public function update($id, array $values)
     {
-
         $data = [];
         foreach ($values as $key => $value) {
             $data[] = $key . "= :" . $key;
@@ -87,14 +81,11 @@ class QueryBuilder
         $query = "UPDATE $this->table SET  $result WHERE  id = $id";
 
         $statement = $this->connection->prepare($query);
-//        var_dump($query);die();
         return $statement->execute($values);
-
     }
 
     public function where(string $column, string $value)
     {
-
         if (!is_null($this->where)) {
             $this->query = $this->query . " WHERE ";
         } else {
@@ -118,8 +109,11 @@ class QueryBuilder
         return $statement->fetch();
     }
 
-    public function orWhere()
+    public function delete($id)
     {
+        $query = "DELETE FROM $this->table WHERE id = $id";
 
+        $statement = $this->connection->prepare($query);
+        return $statement->execute();
     }
 }

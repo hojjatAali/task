@@ -21,52 +21,49 @@ class TaskController
     {
 
         view('task/create');
-
     }
 
 
     public function index()
     {
         $user_id = $_SESSION[$_COOKIE['id']];
-        $tasks = $this->repository->search('task', ['user_id', $user_id]);
-        view('task/index',compact('tasks'));
-
+        $tasks = $this->repository->search('task', [['user_id', $user_id]]);
+        view('task/index', compact('tasks'));
     }
 
     public function show($data)
     {
         $task = $this->repository->find('task', $data['id']);
-       
-        view('task/show',compact('task'));
 
-
+        view('task/show', compact('task'));
     }
 
     public function edit($data)
     {
-        $task=$this->repository->find('task',$data['id']);
-        view('task/edit',compact('task'));
+        $task = $this->repository->find('task', $data['id']);
 
+        view('task/edit', compact('task'));
     }
 
     public function update($data)
     {
-        $id= (int)$data['id'];
+        $id = (int)$data['id'];
 
-        $task=[
-            'title'=>$_POST['title'],
-            'content'=> $_POST['content'],
-            'group_id'=>$_POST['group_id']
+        $task = [
+            'title' => $_POST['title'],
+            'content' => $_POST['content'],
+            'group_id' => $_POST['group_id']
         ];
 
-        $this->repository->update('task',$id,$task);
+        $this->repository->update('task', $id, $task);
 
         header('location:/tasks');
     }
 
     public function delete($data)
     {
-        $id= (int)$data['id'];
+        $id = (int)$data['id'];
+        // $this->repository->delete('task', $id);
         $deletedtask = ['is_delete' =>1];
         $this->repository->update('task', $id, $deletedtask);
         header('location:/tasks');
@@ -74,14 +71,13 @@ class TaskController
 
     public function store()
     {
-        $task=[
-          'title'=>$_POST['title'],
-          'content'=> $_POST['content'],
-          'group_id'=>$_POST['group_id']
+        $task = [
+            'user_id' => $_SESSION[$_COOKIE['id']],
+            'title' => $_POST['title'],
+            'content' => $_POST['content'],
+            'group_id' => $_POST['group_id']
         ];
-        $this->repository->insert($task,'task');
-        view('task/index');
-
+        $this->repository->insert($task, 'task');
+        header('location:/tasks');
     }
-
 }
