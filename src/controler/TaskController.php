@@ -29,8 +29,8 @@ class TaskController
 
     public function index()
     {
-
-        $tasks = $this->repository->read('task');
+        $user_id = $_SESSION[$_COOKIE['id']];
+        $tasks = $this->repository->search('task', ['user_id', $user_id]);
         view('task/index',compact('tasks'));
 
     }
@@ -38,6 +38,7 @@ class TaskController
     public function show($data)
     {
         $task = $this->repository->find('task', $data['id']);
+       
         view('task/show',compact('task'));
 
 

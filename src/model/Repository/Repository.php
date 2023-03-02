@@ -28,8 +28,18 @@ class Repository
 
     }
 
+    public function search($table, array $conditions, $column = ['*']){
+        $query = $this->queryBuilder::table($table)->select($column);
+        foreach($conditions as $condition){
+            $query = $query->where($condition[0], $condition[1]);
+        }
+        return $query->get();
+    }
+
+
     public function read($table, $column =['*'])
     {
+
         return $this->queryBuilder::table($table)->select($column)->where('is_delete', 0)->get();
 
     }
