@@ -12,7 +12,7 @@ function view($name, $data = null)
 function login(array $user)
 {
 
-    $token = bin2hex(random_bytes(2));
+    $token = strval(bin2hex(random_bytes(2)));
     $_SESSION[$token] = $user['id'];
     setcookie('id', $token);
 }

@@ -19,6 +19,10 @@ require_once __DIR__.'/../layout/header.php';
 
      <a href="/show?id=<?=$value['id']?>"> <button >read more</button></a>
 
+     <form action="/delete?id=<?=$value['id']?>" method="post">
+     <input type="submit" value="delete">
+    </form>
+
 
 
        <?php

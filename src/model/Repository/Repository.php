@@ -30,7 +30,7 @@ class Repository
 
     public function read($table, $column =['*'])
     {
-        return $this->queryBuilder::table($table)->select($column)->get();
+        return $this->queryBuilder::table($table)->select($column)->where('is_delete', 0)->get();
 
     }
 

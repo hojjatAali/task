@@ -65,11 +65,12 @@ class TaskController
         header('location:/tasks');
     }
 
-    public function delete()
+    public function delete($data)
     {
-
-
-
+        $id= (int)$data['id'];
+        $deletedtask = ['is_delete' =>1];
+        $this->repository->update('task', $id, $deletedtask);
+        header('location:/tasks');
     }
 
     public function store()
