@@ -7,8 +7,8 @@ require_once __DIR__.'/../layout/header.php';
 
 <form action="/add" method="post">
 <div>
-  <label for="group"></label>
-  <select name="group" >
+<label class="form-label" for="group">Group Name</label>
+  <select name="group" class="form-control">
     <?php
     foreach($groups as $group){?>
       <option value="<?=$group['id']?>"><?=$group['name']?></option>
@@ -17,8 +17,8 @@ require_once __DIR__.'/../layout/header.php';
 </div>
 
 <div>
-  <label for="user"></label>
-  <select name="user" >
+<label class="form-label" for="user">User</label>
+  <select name="user" class="form-control">
     <?php
     foreach($users as $user){?>
       <option value="<?=$user['id']?>"><?=$user['name']?></option>

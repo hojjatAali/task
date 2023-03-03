@@ -3,7 +3,7 @@
 
 function view($name, $data = null)
 {
-
+    // var_dump($data); die();
     isset($data) ? extract($data) :null;
     require './src/views/' . $name . '.php';
 

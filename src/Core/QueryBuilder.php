@@ -54,6 +54,7 @@ class QueryBuilder
         $statement = $this->connection->prepare($this->query);
 
         $statement->execute($this->where);
+        var_dump($this->where); die();
 
         return $statement->fetchAll();
     }

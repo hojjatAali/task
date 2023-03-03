@@ -30,8 +30,9 @@
 
                 <?php else : ?>
 
+                    
                     <a href="/task" class="text-decoration-none">create task</a>
-
+                    <a href="/group" class="text-decoration-none">create group</a>
 
                     <form action="/logout" method="POST">
                         <div class="form-group">

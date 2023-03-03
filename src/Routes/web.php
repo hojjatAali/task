@@ -28,6 +28,7 @@ Router::post('/register', [RegisterControler::class, 'store']);
 Router::get('/group', [GroupController::class, 'create']);
 Router::post('/group', [GroupController::class, 'store']);
 Router::get('/groups', [GroupController::class, 'index']);
+Router::get('/showgroup', [GroupController::class, 'show']);
 
 
 Router::post('/add', [GroupController::class, 'addUser']);
