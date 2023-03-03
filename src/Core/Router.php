@@ -33,7 +33,7 @@ class Router{
 
         $action = $findedRoute[1];
 
-        $controller->$action($_GET);
+        $controller->$action();
 
     }
 

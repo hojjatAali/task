@@ -15,9 +15,8 @@ class HomeControler
 
     public function index(){
         $groups = $this->repository->read('groups');
-        var_dump($groups); die();
 
-        view('home/index',compact('groups'));
+        view('home/index', compact('groups'));
     }
 
 }

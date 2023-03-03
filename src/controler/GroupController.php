@@ -19,7 +19,7 @@ class GroupController
     $groups = $this->repository->read('groups');
 
     $users = $this->repository->read('user');
-    // var_dump(compact('groups', 'users'));die();
+  
     view('group/index', compact('groups', 'users'));
   }
   public function create()
@@ -33,8 +33,11 @@ class GroupController
     $group = ['name' => $_POST['name']];
     $this->repository->insert($group, 'groups');
 
+    $users = $this->repository->read('user');
+    $groups = $this->repository->read('groups');
 
-    view('group/index',);
+
+    view('group/index',compact('users', 'groups'));
   }
   public function addUser()
   {
@@ -43,7 +46,6 @@ class GroupController
       'user_id' => (int)$_POST['user'],
       'group_id' => (int)$_POST['group']
     ];
-    // var_dump($data); die();
 
     $this->repository->insert($data, 'group_user');
 
@@ -52,8 +54,10 @@ class GroupController
 
   public function show()
   {
-    $index = (int)$_GET['id'];
-    $group = $this->repository->find('groups', $index);
+    $id = (int)$_GET['id'];
+    $group = $this->repository->find('groups', $id);
+    // select id, name from user join group_user on user.id = group_user.user_id
+    // 
 
     view('group/show',compact('group'));
   }

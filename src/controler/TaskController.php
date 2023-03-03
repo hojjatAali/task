@@ -31,23 +31,24 @@ class TaskController
         view('task/index', compact('tasks'));
     }
 
-    public function show($data)
+    public function show()
     {
-        $task = $this->repository->find('task', $data['id']);
+        $task = $this->repository->find('task', $_GET['id']);
 
         view('task/show', compact('task'));
     }
 
-    public function edit($data)
+    public function edit()
     {
-        $task = $this->repository->find('task', $data['id']);
+        $task = $this->repository->find('task', $_GET['id']);
+        
 
         view('task/edit', compact('task'));
     }
 
-    public function update($data)
+    public function update()
     {
-        $id = (int)$data['id'];
+        $id = (int)$_GET['id'];
 
         $task = [
             'title' => $_POST['title'],
@@ -60,9 +61,9 @@ class TaskController
         header('location:/tasks');
     }
 
-    public function delete($data)
+    public function delete()
     {
-        $id = (int)$data['id'];
+        $id = (int)$_GET['id'];
         // $this->repository->delete('task', $id);
         $deletedtask = ['is_delete' =>1];
         $this->repository->update('task', $id, $deletedtask);

@@ -6,7 +6,7 @@ var_dump($group);
 ?>
 
 
-<h1><?= $group['name'] ?></h1>
+<h1><?= $group->name ?></h1>
 <hr>
 
 <p><?= $task['content'] ?></p>

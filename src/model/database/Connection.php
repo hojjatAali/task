@@ -30,7 +30,9 @@ class Connection
 
         $dsn = "$driver:host=$host;dbname=$dbname";
 
-        return new PDO($dsn, $username, $password);
+        $pdo = new PDO($dsn, $username, $password);
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        return $pdo;
 
     }
 

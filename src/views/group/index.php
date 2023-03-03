@@ -11,7 +11,7 @@ require_once __DIR__.'/../layout/header.php';
   <select name="group" class="form-control">
     <?php
     foreach($groups as $group){?>
-      <option value="<?=$group['id']?>"><?=$group['name']?></option>
+      <option value="<?=$group->id?>"><?=$group->name?></option>
    <?php }?>
   </select>
 </div>
@@ -21,7 +21,7 @@ require_once __DIR__.'/../layout/header.php';
   <select name="user" class="form-control">
     <?php
     foreach($users as $user){?>
-      <option value="<?=$user['id']?>"><?=$user['name']?></option>
+      <option value="<?=$user->id?>"><?=$user->name?></option>
    <?php }?>
   </select>
 </div>

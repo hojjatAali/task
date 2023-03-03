@@ -31,24 +31,20 @@ class LoginControler
         if ($user == null) {
             return view('Login/create');
         }
-        if ($password !== $user['password']) {
+        if ($password !== $user->password) {
 
-            return view('Register/Create');
+            return redirect('register');
 
         }
 
         login($user);
 
-        return view('home/index');
-
-
+        return redirect('/');
     }
 
     public function destroy()
     {
         logout();
-        return view('home/index');
+        return redirect('/');
     }
-
-
 }
